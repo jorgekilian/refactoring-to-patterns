@@ -20,17 +20,26 @@ namespace RefactoringToPatterns.ComposeMethod
 
         public void Add(Object element) {
             if(!_readOnly) {
-                if(_size + 1 > _elements.Length) {
-                    Object[] newElements = new Object[_elements.Length + 10];
-
-                    for (int i = 0; i < _size; i++)
-                        newElements[i] = _elements[i];
+                if(ListIsTooSmall()) {
+                    var newElements = AddTenElements();
 
                     _elements = newElements;
                 }
 
                 _elements[_size++] = element;
             }
+        }
+
+        private object[] AddTenElements() {
+            Object[] newElements = new Object[_elements.Length + 10];
+
+            for (int i = 0; i < _size; i++)
+                newElements[i] = _elements[i];
+            return newElements;
+        }
+
+        private bool ListIsTooSmall() {
+            return _size + 1 > _elements.Length;
         }
 
         public object[] Elements()
