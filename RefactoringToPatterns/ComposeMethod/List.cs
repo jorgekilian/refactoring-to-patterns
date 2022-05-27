@@ -19,13 +19,12 @@ namespace RefactoringToPatterns.ComposeMethod
         }
 
         public void Add(Object element) {
-            if(!_readOnly) {
-                if(ListIsTooSmall()) {
-                    _elements = AddTenElements();
-                }
-
-                _elements[_size++] = element;
+            if (_readOnly) return;
+            if(ListIsTooSmall()) {
+                _elements = AddTenElements();
             }
+
+            _elements[_size++] = element;
         }
 
         private object[] AddTenElements() {
