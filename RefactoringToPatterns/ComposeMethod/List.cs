@@ -21,9 +21,7 @@ namespace RefactoringToPatterns.ComposeMethod
         public void Add(Object element) {
             if(!_readOnly) {
                 if(ListIsTooSmall()) {
-                    var newElements = AddTenElements();
-
-                    _elements = newElements;
+                    _elements = AddTenElements();
                 }
 
                 _elements[_size++] = element;
