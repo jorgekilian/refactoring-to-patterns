@@ -51,5 +51,9 @@ namespace RefactoringToPatterns.CreationMethods {
         public static ProductPackage CreateProductWithInternetWithMobileWithTv(string speed, int mobile, string[] tvChannels) {
             return new ProductPackage(speed, null, tvChannels, mobile);
         }
+
+        public static ProductPackage CreateProductWithInternetWihtVoipWithMobileWithTv(string speed, int telephoneNumber, int mobile, string[] tvChannels) {
+            return new ProductPackage(speed, telephoneNumber, tvChannels, mobile);
+        }
     }
 }
