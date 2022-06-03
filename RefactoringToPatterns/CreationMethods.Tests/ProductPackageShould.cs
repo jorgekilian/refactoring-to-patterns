@@ -1,12 +1,9 @@
 using Xunit;
 
-namespace RefactoringToPatterns.CreationMethods.Tests
-{
-    public class ProductPackageShould
-    {
+namespace RefactoringToPatterns.CreationMethods.Tests {
+    public class ProductPackageShould {
         [Fact]
-        public void CreateAProductPackageWithOnlyInternet()
-        {
+        public void CreateAProductPackageWithOnlyInternet() {
             var productPackage = ProductPackage.CreateProductWithInternet("100MB");
 
             Assert.True(productPackage.HasInternet());
@@ -15,8 +12,7 @@ namespace RefactoringToPatterns.CreationMethods.Tests
         }
 
         [Fact]
-        public void CreateWithInternetAndVoip()
-        {
+        public void CreateWithInternetAndVoip() {
             var productPackage = ProductPackage.CreateProductWithInternetWithVoip("100MB", 91233788);
 
             Assert.True(productPackage.HasInternet());
@@ -25,9 +21,8 @@ namespace RefactoringToPatterns.CreationMethods.Tests
         }
 
         [Fact]
-        public void CreateWithInternetAndTv()
-        {
-            var productPackage = ProductPackage.CreateProductWithInternetWithTv("100MB", new[] {"LaLiga", "Estrenos"});
+        public void CreateWithInternetAndTv() {
+            var productPackage = ProductPackage.CreateProductWithInternetWithTv("100MB", new[] { "LaLiga", "Estrenos" });
 
             Assert.True(productPackage.HasInternet());
             Assert.False(productPackage.HasVOIP());
@@ -35,9 +30,8 @@ namespace RefactoringToPatterns.CreationMethods.Tests
         }
 
         [Fact]
-        public void CreateWithInternetVoipAndTv()
-        {
-            var productPackage = ProductPackage.CreateProductWithInternetWithVoipWithTv("100MB", 91233788, new[] {"LaLiga", "Estrenos"});
+        public void CreateWithInternetVoipAndTv() {
+            var productPackage = ProductPackage.CreateProductWithInternetWithVoipWithTv("100MB", 91233788, new[] { "LaLiga", "Estrenos" });
 
             Assert.True(productPackage.HasInternet());
             Assert.True(productPackage.HasVOIP());
