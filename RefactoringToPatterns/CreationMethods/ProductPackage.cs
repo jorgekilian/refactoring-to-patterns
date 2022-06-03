@@ -11,7 +11,7 @@ namespace RefactoringToPatterns.CreationMethods
             _internetLabel = internetLabel;
         }
 
-        public ProductPackage(string internetLabel, int telephoneNumber)
+        internal ProductPackage(string internetLabel, int telephoneNumber)
         {
             _internetLabel = internetLabel;
             _telephoneNumber = telephoneNumber;
@@ -46,8 +46,12 @@ namespace RefactoringToPatterns.CreationMethods
             return _tvChannels != null;
         }
 
-        public static ProductPackage CreateProductWithInternet(string Speed) {
-            return new ProductPackage(Speed);
+        public static ProductPackage CreateProductWithInternet(string speed) {
+            return new ProductPackage(speed);
+        }
+
+        public static ProductPackage CreateProductWithInternetWithVoip(string speed, int telephoneNumber) {
+            return new ProductPackage(speed, telephoneNumber);
         }
     }
 }
