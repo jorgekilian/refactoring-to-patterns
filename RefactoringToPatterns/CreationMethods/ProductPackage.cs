@@ -3,12 +3,13 @@ namespace RefactoringToPatterns.CreationMethods {
         private readonly string _internetLabel;
         private readonly int? _telephoneNumber;
         private readonly string[] _tvChannels;
+        private readonly int? _mobile;
 
-
-        internal ProductPackage(string internetLabel, int? telephoneNumber = null, string[] tvChannels = null) {
+        internal ProductPackage(string internetLabel, int? telephoneNumber = null, string[] tvChannels = null, int? mobile = null) {
             _internetLabel = internetLabel;
             _telephoneNumber = telephoneNumber;
             _tvChannels = tvChannels;
+            _mobile = mobile;
         }
 
         public bool HasInternet() {
@@ -22,6 +23,9 @@ namespace RefactoringToPatterns.CreationMethods {
 
         public bool HasTv() {
             return _tvChannels != null;
+        }
+        public bool HasMobile() {
+            return _mobile != null;
         }
 
         public static ProductPackage CreateProductWithInternet(string speed) {
@@ -39,5 +43,10 @@ namespace RefactoringToPatterns.CreationMethods {
         public static ProductPackage CreateProductWithInternetWithVoipWithTv(string speed, int telephoneNumber, string[] tvChannels) {
             return new ProductPackage(speed, telephoneNumber, tvChannels);
         }
+
+        public static ProductPackage CreateProductWithInternetWithMobile(string speed, int mobile) {
+            return new ProductPackage(speed, null, null, mobile);
+        }
+
     }
 }
