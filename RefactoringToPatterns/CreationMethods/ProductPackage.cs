@@ -6,7 +6,7 @@ namespace RefactoringToPatterns.CreationMethods
         private readonly int? _telephoneNumber;
         private readonly string[] _tvChannels;
 
-        public ProductPackage(string internetLabel)
+        internal ProductPackage(string internetLabel)
         {
             _internetLabel = internetLabel;
         }
@@ -44,6 +44,10 @@ namespace RefactoringToPatterns.CreationMethods
         public bool HasTv()
         {
             return _tvChannels != null;
+        }
+
+        public static ProductPackage CreateProductWithInternet(string Speed) {
+            return new ProductPackage(Speed);
         }
     }
 }
