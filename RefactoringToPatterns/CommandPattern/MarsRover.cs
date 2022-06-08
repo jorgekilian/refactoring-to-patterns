@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace RefactoringToPatterns.CommandPattern
 {
     public class MarsRover
@@ -10,6 +8,7 @@ namespace RefactoringToPatterns.CommandPattern
         private readonly string _availableDirections = "NESW";
         private readonly string[] _obstacles;
         private bool _obstacleFound;
+        private readonly Movement movement;
 
         public MarsRover(int x, int y, char direction, string[] obstacles)
         {
@@ -17,8 +16,39 @@ namespace RefactoringToPatterns.CommandPattern
             _y = y;
             _direction = direction;
             _obstacles = obstacles;
+            movement = new Movement(this);
         }
-        
+
+        public int X {
+            set { _x = value; }
+            get { return _x; }
+        }
+
+        public bool ObstacleFound {
+            set { _obstacleFound = value; }
+            get { return _obstacleFound; }
+        }
+
+        public bool Found {
+            set { _obstacleFound = value; }
+            get { return _obstacleFound; }
+        }
+
+        public int Y {
+            set { _y = value; }
+            get { return _y; }
+        }
+
+        public bool ObstacleFound1 {
+            set { _obstacleFound = value; }
+            get { return _obstacleFound; }
+        }
+
+        public bool Found1 {
+            set { _obstacleFound = value; }
+            get { return _obstacleFound; }
+        }
+
         public string GetState()
         {
             return !_obstacleFound ? $"{_x}:{_y}:{_direction}" : $"O:{_x}:{_y}:{_direction}";
@@ -33,16 +63,16 @@ namespace RefactoringToPatterns.CommandPattern
                     switch (_direction)
                     {
                         case 'E':
-                            EastDirection();
+                            movement.ToEast(_x, _y, _obstacles);
                             break;
                         case 'S':
-                            SouthDirection();
+                            movement.ToSouth(_x, _y, _obstacles);
                             break;
                         case 'W':
-                            WestDirection();
+                            movement.ToWest(_x, _y, _obstacles);
                             break;
                         case 'N':
-                            NorthDirection();
+                            movement.ToNorth(_x, _y, _obstacles);
                             break;
                     }
                 }
@@ -72,30 +102,6 @@ namespace RefactoringToPatterns.CommandPattern
                     }
                 }
             }
-        }
-
-        private void NorthDirection() {
-            _obstacleFound = _obstacles.Contains($"{_x}:{_y - 1}");
-            // check if rover reached plateau limit or found an obstacle
-            _y = _y > 0 && !_obstacleFound ? _y -= 1 : _y;
-        }
-
-        private void WestDirection() {
-            _obstacleFound = _obstacles.Contains($"{_x - 1}:{_y}");
-            // check if rover reached plateau limit or found an obstacle
-            _x = _x > 0 && !_obstacleFound ? _x -= 1 : _x;
-        }
-
-        private void SouthDirection() {
-            _obstacleFound = _obstacles.Contains($"{_x}:{_y + 1}");
-            // check if rover reached plateau limit or found an obstacle
-            _y = _y < 9 && !_obstacleFound ? _y += 1 : _y;
-        }
-
-        private void EastDirection() {
-            _obstacleFound = _obstacles.Contains($"{_x + 1}:{_y}");
-            // check if rover reached plateau limit or found an obstacle
-            _x = _x < 9 && !_obstacleFound ? _x += 1 : _x;
         }
     }
 }
