@@ -2,36 +2,38 @@ using System.Linq;
 
 namespace RefactoringToPatterns.CommandPattern {
     public class Movement {
+        private string[] obstacles;
         public int Y { get; private set; }
         public int X { get; private set; }
-        public bool ObstacleFound { get; set; }
+        public bool ObstacleFound { get; private set; }
 
-        public Movement(int x, int y) {
+        public Movement(int x, int y, string[] obstacles) {
             X = x;
             Y = y;
+            this.obstacles = obstacles;
         }
-        private bool ExistObstacle(int x, int y, string[] obstacles) {
+        private bool ExistObstacle(int x, int y) {
             return obstacles.Contains($"{x}:{y}");
         }
 
-        public void ToEast(string[] obstacles) {
-            ObstacleFound = ExistObstacle(X + 1, Y, obstacles);
+        public void ToEast() {
+            ObstacleFound = ExistObstacle(X + 1, Y);
             X = X < 9 && !ObstacleFound ? X += 1 : X;
         }
 
 
-        public void ToSouth(string[] obstacles) {
-            ObstacleFound = ExistObstacle(X, Y + 1, obstacles);
+        public void ToSouth() {
+            ObstacleFound = ExistObstacle(X, Y + 1);
             Y = Y < 9 && !ObstacleFound ? Y += 1 : Y;
         }
 
-        public void ToWest(string[] obstacles) {
-            ObstacleFound = ExistObstacle(X - 1, Y, obstacles);
+        public void ToWest() {
+            ObstacleFound = ExistObstacle(X - 1, Y);
             X = X > 0 && !ObstacleFound ? X -= 1 : X;
         }
 
-        public void ToNorth(string[] obstacles) {
-            ObstacleFound = ExistObstacle(X, Y - 1, obstacles);
+        public void ToNorth() {
+            ObstacleFound = ExistObstacle(X, Y - 1);
             Y = Y > 0 && !ObstacleFound ? Y -= 1 : Y;
         }
     }
