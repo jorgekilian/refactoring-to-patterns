@@ -27,7 +27,7 @@ namespace RefactoringToPatterns.CommandPattern {
         }
 
         public string GetState() {
-            return !movement.MarsRoverObstacleFound ? $"{_x}:{_y}:{_direction}" : $"O:{_x}:{_y}:{_direction}";
+            return !movement.ObstacleFound ? $"{_x}:{_y}:{_direction}" : $"O:{_x}:{_y}:{_direction}";
         }
 
         public void Execute(string commands) {
