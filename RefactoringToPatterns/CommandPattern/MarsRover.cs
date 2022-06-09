@@ -13,16 +13,11 @@ namespace RefactoringToPatterns.CommandPattern {
             _y = y;
             _direction = direction;
             _obstacles = obstacles;
-            movement = new Movement(this, x);
-        }
-
-        public int Y {
-            set { _y = value; }
-            get { return _y; }
+            movement = new Movement(this, x, y);
         }
 
         public string GetState() {
-            return !movement.ObstacleFound ? $"{movement.X}:{_y}:{_direction}" : $"O:{movement.X}:{_y}:{_direction}";
+            return !movement.ObstacleFound ? $"{movement.X}:{movement.Y}:{_direction}" : $"O:{movement.X}:{movement.Y}:{_direction}";
         }
 
         public void Execute(string commands) {
@@ -30,16 +25,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (_direction) {
                         case 'E':
-                            movement.ToEast(_y, _obstacles);
+                            movement.ToEast(_obstacles);
                             break;
                         case 'S':
-                            movement.ToSouth(_y, _obstacles);
+                            movement.ToSouth(_obstacles);
                             break;
                         case 'W':
-                            movement.ToWest(_y, _obstacles);
+                            movement.ToWest(_obstacles);
                             break;
                         case 'N':
-                            movement.ToNorth(_y, _obstacles);
+                            movement.ToNorth(_obstacles);
                             break;
                     }
                 }
