@@ -21,23 +21,13 @@ namespace RefactoringToPatterns.CommandPattern {
             get { return _x; }
         }
 
-        public bool ObstacleFound {
-            set { _obstacleFound = value; }
-            get { return _obstacleFound; }
-        }
-
-        public bool Found {
-            set { _obstacleFound = value; }
-            get { return _obstacleFound; }
-        }
-
         public int Y {
             set { _y = value; }
             get { return _y; }
         }
 
         public string GetState() {
-            return !_obstacleFound ? $"{_x}:{_y}:{_direction}" : $"O:{_x}:{_y}:{_direction}";
+            return !movement.MarsRoverObstacleFound ? $"{_x}:{_y}:{_direction}" : $"O:{_x}:{_y}:{_direction}";
         }
 
         public void Execute(string commands) {
