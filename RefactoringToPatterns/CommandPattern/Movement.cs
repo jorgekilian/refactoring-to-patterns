@@ -2,15 +2,13 @@ using System.Linq;
 
 namespace RefactoringToPatterns.CommandPattern {
     public class Movement {
-        private MarsRover marsRover;
         public int Y { get; private set; }
         public int X { get; private set; }
         public bool ObstacleFound { get; set; }
 
-        public Movement(MarsRover marsRover, int x, int y) {
-            this.marsRover = marsRover;
-            this.X = x;
-            this.Y = y;
+        public Movement(int x, int y) {
+            X = x;
+            Y = y;
         }
         private bool ExistObstacle(int x, int y, string[] obstacles) {
             return obstacles.Contains($"{x}:{y}");

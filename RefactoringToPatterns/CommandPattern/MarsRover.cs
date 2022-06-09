@@ -13,7 +13,7 @@ namespace RefactoringToPatterns.CommandPattern {
             _y = y;
             _direction = direction;
             _obstacles = obstacles;
-            movement = new Movement(this, x, y);
+            movement = new Movement(x, y);
         }
 
         public string GetState() {
