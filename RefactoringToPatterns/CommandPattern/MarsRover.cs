@@ -1,18 +1,11 @@
 namespace RefactoringToPatterns.CommandPattern {
     public class MarsRover {
-        private int _x;
-        private int _y;
         private char _direction;
         private readonly string _availableDirections = "NESW";
-        private readonly string[] _obstacles;
-        private bool _obstacleFound;
         private readonly Movement movement;
 
         public MarsRover(int x, int y, char direction, string[] obstacles) {
-            _x = x;
-            _y = y;
             _direction = direction;
-            _obstacles = obstacles;
             movement = new Movement(x, y, obstacles);
         }
 
