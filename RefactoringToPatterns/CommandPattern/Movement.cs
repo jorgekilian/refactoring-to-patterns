@@ -18,13 +18,13 @@ namespace RefactoringToPatterns.CommandPattern {
         }
 
         public void ToWest(int x, int y, string[] obstacles) {
-            marsRover.ObstacleFound1 = obstacles.Contains($"{x - 1}:{y}");
-            marsRover.X = x > 0 && !marsRover.ObstacleFound1 ? marsRover.X -= 1 : x;
+            marsRover.ObstacleFound = obstacles.Contains($"{x - 1}:{y}");
+            marsRover.X = x > 0 && !marsRover.ObstacleFound ? marsRover.X -= 1 : x;
         }
 
         public void ToNorth(int x, int y, string[] obstacles) {
-            marsRover.Found1 = obstacles.Contains($"{x}:{y - 1}");
-            marsRover.Y = y > 0 && !marsRover.Found1 ? marsRover.Y -= 1 : y;
+            marsRover.Found = obstacles.Contains($"{x}:{y - 1}");
+            marsRover.Y = y > 0 && !marsRover.Found ? marsRover.Y -= 1 : y;
         }
     }
 }

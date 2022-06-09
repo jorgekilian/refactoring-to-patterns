@@ -39,16 +39,6 @@ namespace RefactoringToPatterns.CommandPattern
             get { return _y; }
         }
 
-        public bool ObstacleFound1 {
-            set { _obstacleFound = value; }
-            get { return _obstacleFound; }
-        }
-
-        public bool Found1 {
-            set { _obstacleFound = value; }
-            get { return _obstacleFound; }
-        }
-
         public string GetState()
         {
             return !_obstacleFound ? $"{_x}:{_y}:{_direction}" : $"O:{_x}:{_y}:{_direction}";
