@@ -3,8 +3,10 @@ namespace RefactoringToPatterns.CommandPattern {
         private char _direction;
         private readonly string _availableDirections = "NESW";
         private readonly Movement movement;
+        private Position position;
 
         public MarsRover(Position position, char direction, string[] obstacles) {
+            this.position = position;
             _direction = direction;
             movement = new Movement(position, obstacles);
         }
