@@ -22,26 +22,26 @@ namespace RefactoringToPatterns.CommandPattern {
         public Position ToEast() {
             ObstacleFound = ExistObstacle(X + 1, Y);
             X = X < 9 && !ObstacleFound ? X += 1 : X;
-            return this.position;
+            return position;
         }
 
 
         public Position ToSouth() {
             ObstacleFound = ExistObstacle(X, Y + 1);
             Y = Y < 9 && !ObstacleFound ? Y += 1 : Y;
-            return this.position;
+            return position;
         }
 
         public Position ToWest() {
             ObstacleFound = ExistObstacle(X - 1, Y);
             X = X > 0 && !ObstacleFound ? X -= 1 : X;
-            return this.position;
+            return position;
         }
 
         public Position ToNorth() {
             ObstacleFound = ExistObstacle(X, Y - 1);
             Y = Y > 0 && !ObstacleFound ? Y -= 1 : Y;
-            return this.position;
+            return position;
         }
     }
 }
