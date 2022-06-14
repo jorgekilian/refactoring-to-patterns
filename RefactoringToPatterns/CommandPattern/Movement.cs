@@ -1,15 +1,16 @@
 using System.Linq;
 
 namespace RefactoringToPatterns.CommandPattern {
+
     public class Movement {
         private string[] obstacles;
         public int Y { get; private set; }
         public int X { get; private set; }
         public bool ObstacleFound { get; private set; }
 
-        public Movement(int x, int y, string[] obstacles) {
-            X = x;
-            Y = y;
+        public Movement(Position position, string[] obstacles) {
+            X = position.X;
+            Y = position.Y;
             this.obstacles = obstacles;
         }
         private bool ExistObstacle(int x, int y) {

@@ -4,9 +4,9 @@ namespace RefactoringToPatterns.CommandPattern {
         private readonly string _availableDirections = "NESW";
         private readonly Movement movement;
 
-        public MarsRover(int x, int y, char direction, string[] obstacles) {
+        public MarsRover(Position position, char direction, string[] obstacles) {
             _direction = direction;
-            movement = new Movement(x, y, obstacles);
+            movement = new Movement(position, obstacles);
         }
 
         public string GetState() {
