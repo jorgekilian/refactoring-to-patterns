@@ -2,17 +2,18 @@ namespace RefactoringToPatterns.CommandPattern {
     public class MarsRover {
         private char direction;
         private readonly string _availableDirections = "NESW";
-        private readonly Movement movement;
+        private Terrain terrain;
+        private bool obstacleFound;
         private Position position;
 
         public MarsRover(Position position, char direction, string[] obstacles) {
             this.position = position;
             this.direction = direction;
-            movement = new Movement(position, obstacles);
+            terrain = new Terrain(obstacles);
         }
 
         public string GetState() {
-            return !movement.ObstacleFound ? $"{movement.X}:{movement.Y}:{direction}" : $"O:{movement.X}:{movement.Y}:{direction}";
+            return !obstacleFound ? $"{position.X}:{position.Y}:{direction}" : $"O:{position.X}:{position.Y}:{direction}";
         }
 
         public void Execute(string commands) {
@@ -20,16 +21,20 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            movement.ToEast();
+                            obstacleFound = terrain.ExistObstacle(position.East());
+                            position.X = position.X < 9 && !obstacleFound ? position.X += 1 : position.X;
                             break;
                         case 'S':
-                            movement.ToSouth();
+                            obstacleFound = terrain.ExistObstacle(position.South());
+                            position.Y = position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y;
                             break;
                         case 'W':
-                            movement.ToWest();
+                            obstacleFound = terrain.ExistObstacle(position.West());
+                            position.X = position.X > 0 && !obstacleFound ? position.X -= 1 : position.X;
                             break;
                         case 'N':
-                            movement.ToNorth();
+                            obstacleFound = terrain.ExistObstacle(position.North());
+                            position.Y = position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y;
                             break;
                     }
                 }
