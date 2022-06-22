@@ -21,20 +21,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            obstacleFound = terrain.ExistObstacle(position.East());
-                            position.X = position.X < 9 && !obstacleFound ? position.X += 1 : position.X;
+                            MoveEast();
                             break;
                         case 'S':
-                            obstacleFound = terrain.ExistObstacle(position.South());
-                            position.Y = position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y;
+                            MoveSouth();
                             break;
                         case 'W':
-                            obstacleFound = terrain.ExistObstacle(position.West());
-                            position.X = position.X > 0 && !obstacleFound ? position.X -= 1 : position.X;
+                            MoveWest();
                             break;
                         case 'N':
-                            obstacleFound = terrain.ExistObstacle(position.North());
-                            position.Y = position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y;
+                            MoveNorth();
                             break;
                     }
                 }
@@ -59,6 +55,26 @@ namespace RefactoringToPatterns.CommandPattern {
                     }
                 }
             }
+        }
+
+        private void MoveNorth() {
+            obstacleFound = terrain.ExistObstacle(position.North());
+            position.Y = position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y;
+        }
+
+        private void MoveWest() {
+            obstacleFound = terrain.ExistObstacle(position.West());
+            position.X = position.X > 0 && !obstacleFound ? position.X -= 1 : position.X;
+        }
+
+        private void MoveSouth() {
+            obstacleFound = terrain.ExistObstacle(position.South());
+            position.Y = position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y;
+        }
+
+        private void MoveEast() {
+            obstacleFound = terrain.ExistObstacle(position.East());
+            position.X = position.X < 9 && !obstacleFound ? position.X += 1 : position.X;
         }
     }
 }
