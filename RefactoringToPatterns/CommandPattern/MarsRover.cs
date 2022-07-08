@@ -21,16 +21,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            existObstacle = new MoveEastHandler(position).MoveEast();
+                            existObstacle = new MoveEastHandler(position).Execute();
                             break;
                         case 'S':
-                            existObstacle = new MoveSouthHandler(position).MoveSouth();
+                            existObstacle = new MoveSouthHandler(position).Execute();
                             break;
                         case 'W':
-                            existObstacle = new MoveWestHandler(position).MoveWest();
+                            existObstacle = new MoveWestHandler(position).Execute();
                             break;
                         case 'N':
-                            existObstacle = new MoveNorthHandler(position).MoveNorth();
+                            existObstacle = new MoveNorthHandler(position).Execute();
                             break;
                     }
                 }

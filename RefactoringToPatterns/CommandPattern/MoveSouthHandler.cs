@@ -7,7 +7,7 @@ namespace RefactoringToPatterns.CommandPattern {
             this.position = position;
         }
 
-        public bool MoveSouth() {
+        public bool Execute() {
             var obstacle = ((IList)position.Obstacles).Contains($"{position.X}:{position.Y + 1}");
             if (!obstacle) if (position.Y < 9)
                 position.Y += 1;
