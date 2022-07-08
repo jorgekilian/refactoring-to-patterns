@@ -2,17 +2,16 @@ namespace RefactoringToPatterns.CommandPattern {
     public class MarsRover {
         private char direction;
         private readonly string _availableDirections = "NESW";
-        private Terrain terrain;
         private Position position;
+        private bool existObstacle;
 
-        public MarsRover(Position position, char direction, string[] obstacles) {
+        public MarsRover(Position position, char direction) {
             this.position = position;
             this.direction = direction;
-            terrain = new Terrain(obstacles);
         }
 
         public string GetState() {
-            return !position.HasObstacle ? $"{position.X}:{position.Y}:{direction}" : $"O:{position.X}:{position.Y}:{direction}";
+            return !existObstacle ? $"{position.X}:{position.Y}:{direction}" : $"O:{position.X}:{position.Y}:{direction}";
         }
 
         public void Execute(string commands) {
@@ -20,16 +19,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            position = position.PositionToEast(terrain.ExistObstacle(position.East()));
+                            existObstacle = MoveToEast();
                             break;
                         case 'S':
-                            position = position.PositionToSouth(terrain.ExistObstacle(position.South()));
+                            existObstacle = MoveToSouth();
                             break;
                         case 'W':
-                            position = position.PositionToWest(terrain.ExistObstacle(position.West()));
+                            existObstacle = MoveToWest();
                             break;
                         case 'N':
-                            position = position.PositionToNorth(terrain.ExistObstacle(position.North()));
+                            existObstacle = MoveToNorth();
                             break;
                     }
                 }
@@ -56,5 +55,28 @@ namespace RefactoringToPatterns.CommandPattern {
             }
         }
 
+        private bool MoveToNorth() {
+            var obstacle = position.ExistObstacleAtNorth();
+            if (!obstacle) position = position.PositionToNorth();
+            return obstacle;
+        }
+
+        private bool MoveToWest() {
+            var obstacle = position.ExistObstacleAtWest();
+            if (!obstacle) position = position.PositionToWest();
+            return obstacle;
+        }
+
+        private bool MoveToSouth() {
+            var obstacle = position.ExistObstacleAtSouth();
+            if (!obstacle) position = position.PositionToSouth();
+            return obstacle;
+        }
+
+        private bool MoveToEast() {
+            var obstacle = position.ExistObstacleAtEast();
+            if (!obstacle) position = position.PositionToEast();
+            return obstacle;
+        }
     }
 }

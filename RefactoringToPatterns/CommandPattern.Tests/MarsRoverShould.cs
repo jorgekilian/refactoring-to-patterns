@@ -4,7 +4,7 @@ namespace RefactoringToPatterns.CommandPattern.Tests {
     public class MarsRoverShould {
         [Fact]
         public void AcceptAnInitialState() {
-            MarsRover marsRover = new MarsRover(new Position(0, 0), 'E', new string[] { });
+            MarsRover marsRover = new MarsRover(new Position(0, 0, new string[] { }), 'E');
 
             Assert.Equal("0:0:E", marsRover.GetState());
         }
@@ -15,7 +15,7 @@ namespace RefactoringToPatterns.CommandPattern.Tests {
         [InlineData(1, 0, 'W', "M", "0:0:W")]
         [InlineData(0, 1, 'N', "M", "0:0:N")]
         public void MoveOneCellForward(int x, int y, char direction, string commands, string expectedFinalState) {
-            MarsRover marsRover = new MarsRover(new Position(x, y), direction, new string[] { });
+            MarsRover marsRover = new MarsRover(new Position(x, y, new string[] { }), direction);
 
             marsRover.Execute(commands);
 
@@ -28,7 +28,7 @@ namespace RefactoringToPatterns.CommandPattern.Tests {
         [InlineData(9, 0, 'E', "M", "9:0:E")]
         [InlineData(0, 9, 'S', "M", "0:9:S")]
         public void WrapAroundTheEdgesOfThePlateau(int x, int y, char direction, string commands, string expectedFinalState) {
-            MarsRover marsRover = new MarsRover(new Position(x, y), direction, new string[] { });
+            MarsRover marsRover = new MarsRover(new Position(x, y, new string[] { }), direction);
 
             marsRover.Execute(commands);
 
@@ -45,7 +45,7 @@ namespace RefactoringToPatterns.CommandPattern.Tests {
         [InlineData("RRR", "0:0:N")]
         [InlineData("RRRR", "0:0:E")]
         public void RotateLeftAndRight(string commands, string expectedFinalState) {
-            MarsRover marsRover = new MarsRover(new Position(0, 0), 'E', new string[] { });
+            MarsRover marsRover = new MarsRover(new Position(0, 0, new string[] { }), 'E');
 
             marsRover.Execute(commands);
 
@@ -58,7 +58,7 @@ namespace RefactoringToPatterns.CommandPattern.Tests {
         [InlineData(9, 0, 'W', "MMM", new[] { "7:0" }, "O:8:0:W")]
         [InlineData(0, 9, 'N', "MMM", new[] { "0:7" }, "O:0:8:N")]
         public void StopAndReportIfAnObstacleIsFound(int x, int y, char direction, string commands, string[] obstacles, string expectedFinalState) {
-            MarsRover marsRover = new MarsRover(new Position(x, y), direction, obstacles);
+            MarsRover marsRover = new MarsRover(new Position(x, y, obstacles), direction);
 
             marsRover.Execute(commands);
 
