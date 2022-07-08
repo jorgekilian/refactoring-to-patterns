@@ -12,20 +12,20 @@ namespace RefactoringToPatterns.CommandPattern {
         public int X { get; set; }
         public int Y { get; set; }
 
-        public Position PositionToEast() {
-            return new Position(X < 9 ? X += 1 : X, Y, obstacles);
+        public void PositionToEast() {
+            if (X < 9) X += 1;
         }
 
-        public Position PositionToSouth() {
-            return new Position(X, Y < 9 ? Y += 1 : Y, obstacles);
+        public void PositionToSouth() {
+            if (Y < 9) Y += 1;
         }
 
-        public Position PositionToWest() {
-            return new Position(X > 0 ? X -= 1 : X, Y, obstacles);
+        public void PositionToWest() {
+            if (X > 0) X -= 1;
         }
 
-        public Position PositionToNorth() {
-            return new Position(X, Y > 0 ? Y -= 1 : Y, obstacles);
+        public void PositionToNorth() {
+            if (Y > 0) Y -= 1;
         }
 
         public bool ExistObstacleAtEast() {
