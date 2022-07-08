@@ -1,3 +1,5 @@
+using System.Security.Policy;
+
 namespace RefactoringToPatterns.CommandPattern {
     public class MarsRover {
         private char direction;
@@ -19,16 +21,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            existObstacle = position.MoveEast();
+                            existObstacle = new MoveEastHandler(position).MoveEast();
                             break;
                         case 'S':
-                            existObstacle = position.MoveSouth();
+                            existObstacle = new MoveSouthHandler(position).MoveSouth();
                             break;
                         case 'W':
-                            existObstacle = position.MoveWest();
+                            existObstacle = new MoveWestHandler(position).MoveWest();
                             break;
                         case 'N':
-                            existObstacle = position.MoveNorth();
+                            existObstacle = new MoveNorthHandler(position).MoveNorth();
                             break;
                     }
                 }
