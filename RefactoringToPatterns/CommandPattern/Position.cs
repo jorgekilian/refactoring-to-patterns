@@ -24,5 +24,29 @@ namespace RefactoringToPatterns.CommandPattern {
         public Position North() {
             return new Position(this.X, this.Y - 1);
         }
+
+        public Position PositionToEast(bool hasObstacle) {
+            return new Position(X < 9 && !hasObstacle ? X += 1 : X, Y) {
+                HasObstacle = hasObstacle
+            };
+        }
+
+        public Position PositionToSouth(bool hasObstacle) {
+            return new Position(X, Y < 9 && !hasObstacle ? Y += 1 : Y) {
+                HasObstacle = hasObstacle
+            };
+        }
+
+        public Position PositionToWest(bool hasObstacle) {
+            return new Position(X > 0 && !hasObstacle ? X -= 1 : X, Y) {
+                HasObstacle = hasObstacle
+            };
+        }
+
+        public Position PositionToNorth(bool hasObstacle) {
+            return new Position(X, Y > 0 && !hasObstacle ? Y -= 1 : Y) {
+                HasObstacle = hasObstacle
+            };
+        }
     }
 }

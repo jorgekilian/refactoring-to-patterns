@@ -3,7 +3,6 @@ namespace RefactoringToPatterns.CommandPattern {
         private char direction;
         private readonly string _availableDirections = "NESW";
         private Terrain terrain;
-        private bool obstacleFound;
         private Position position;
 
         public MarsRover(Position position, char direction, string[] obstacles) {
@@ -21,16 +20,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            position = MoveEast(position);
+                            position = position.PositionToEast(terrain.ExistObstacle(position.East()));
                             break;
                         case 'S':
-                            position = MoveSouth(position);
+                            position = position.PositionToSouth(terrain.ExistObstacle(position.South()));
                             break;
                         case 'W':
-                            position = MoveWest(position);
+                            position = position.PositionToWest(terrain.ExistObstacle(position.West()));
                             break;
                         case 'N':
-                            position = MoveNorth(position);
+                            position = position.PositionToNorth(terrain.ExistObstacle(position.North()));
                             break;
                     }
                 }
@@ -57,32 +56,5 @@ namespace RefactoringToPatterns.CommandPattern {
             }
         }
 
-        private Position MoveNorth(Position position) {
-            obstacleFound = terrain.ExistObstacle(position.North());
-            return new Position(position.X, position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y) {
-                HasObstacle = obstacleFound
-            };
-        }
-
-        private Position MoveWest(Position position) {
-            obstacleFound = terrain.ExistObstacle(position.West());
-            return new Position(position.X > 0 && !obstacleFound ? position.X -= 1 : position.X, position.Y){
-                HasObstacle = obstacleFound
-            };
-        }
-
-        private Position MoveSouth(Position position) {
-            obstacleFound = terrain.ExistObstacle(position.South());
-            return new Position(position.X, position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y) {
-                HasObstacle = obstacleFound
-            };
-        }
-
-        private Position MoveEast(Position position) {
-            obstacleFound = terrain.ExistObstacle(position.East());
-            return new Position(position.X < 9 && !obstacleFound ? position.X += 1 : position.X, position.Y) {
-                HasObstacle = obstacleFound
-            };
-        }
     }
 }
