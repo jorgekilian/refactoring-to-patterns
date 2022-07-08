@@ -56,27 +56,19 @@ namespace RefactoringToPatterns.CommandPattern {
         }
 
         private bool MoveToNorth() {
-            var obstacle = position.ExistObstacleAtNorth();
-            if (!obstacle) position.PositionToNorth();
-            return obstacle;
+            return position.PositionToNorth(); ;
         }
 
         private bool MoveToWest() {
-            var obstacle = position.ExistObstacleAtWest();
-            if (!obstacle) position.PositionToWest();
-            return obstacle;
+            return position.PositionToWest(); ;
         }
 
         private bool MoveToSouth() {
-            var obstacle = position.ExistObstacleAtSouth();
-            if (!obstacle) position.PositionToSouth();
-            return obstacle;
+            return position.PositionToSouth(); ;
         }
 
         private bool MoveToEast() {
-            var obstacle = position.ExistObstacleAtEast();
-            if (!obstacle) position.PositionToEast();
-            return obstacle;
+            return position.PositionToEast();
         }
     }
 }

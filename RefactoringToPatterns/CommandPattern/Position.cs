@@ -12,35 +12,43 @@ namespace RefactoringToPatterns.CommandPattern {
         public int X { get; set; }
         public int Y { get; set; }
 
-        public void PositionToEast() {
-            if (X < 9) X += 1;
+        public bool PositionToEast() {
+            var obstacle = ExistObstacleAtEast();
+            if (!obstacle) if (X < 9) X += 1;
+            return obstacle;
         }
 
-        public void PositionToSouth() {
-            if (Y < 9) Y += 1;
+        public bool PositionToSouth() {
+            var obstacle = ExistObstacleAtSouth();
+            if (!obstacle) if (Y < 9) Y += 1;
+            return obstacle;
         }
 
-        public void PositionToWest() {
-            if (X > 0) X -= 1;
+        public bool PositionToWest() {
+            var obstacle = ExistObstacleAtWest();
+            if (!obstacle) if (X > 0) X -= 1;
+            return obstacle;
         }
 
-        public void PositionToNorth() {
-            if (Y > 0) Y -= 1;
+        public bool PositionToNorth() {
+            var obstacle = ExistObstacleAtNorth();
+            if (!obstacle) if (Y > 0) Y -= 1;
+            return obstacle;
         }
 
-        public bool ExistObstacleAtEast() {
+        private bool ExistObstacleAtEast() {
             return obstacles.Contains($"{X + 1}:{Y}");
         }
 
-        public bool ExistObstacleAtSouth() {
+        private bool ExistObstacleAtSouth() {
             return obstacles.Contains($"{X}:{Y + 1}");
         }
 
-        public bool ExistObstacleAtWest() {
+        private bool ExistObstacleAtWest() {
             return obstacles.Contains($"{X - 1}:{Y}");
         }
 
-        public bool ExistObstacleAtNorth() {
+        private bool ExistObstacleAtNorth() {
             return obstacles.Contains($"{X}:{Y - 1}");
         }
     }
