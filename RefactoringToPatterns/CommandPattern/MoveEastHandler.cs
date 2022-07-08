@@ -1,13 +1,13 @@
 using System.Collections;
 
 namespace RefactoringToPatterns.CommandPattern {
-    public class MoveEastHandler {
-        private Position position;
-        public MoveEastHandler(Position position) {
+    public class MoveEastHandler : MoveHandler {
+        private readonly Position position;
+        public MoveEastHandler(Position position) : base(position) {
             this.position = position;
         }
 
-        public bool Execute() {
+        public override bool Execute() {
             var obstacle = ((IList)position.Obstacles).Contains($"{position.X + 1}:{position.Y}");
             if (!obstacle) if (position.X < 9)
                 position.X += 1;

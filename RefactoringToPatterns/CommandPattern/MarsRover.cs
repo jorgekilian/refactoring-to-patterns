@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Data;
 using System.Security.Policy;
 
 namespace RefactoringToPatterns.CommandPattern {
@@ -6,10 +8,24 @@ namespace RefactoringToPatterns.CommandPattern {
         private readonly string _availableDirections = "NESW";
         private Position position;
         private bool existObstacle;
+        private Dictionary<char, MoveHandler> handlers;
 
         public MarsRover(Position position, char direction) {
             this.position = position;
             this.direction = direction;
+            CreateHandlers();
+        }
+
+        private void CreateHandlers() {
+            handlers = new Dictionary<char, MoveHandler>();
+            handlers.Add('E', new MoveEastHandler(position));
+            handlers.Add('S', new MoveSouthHandler(position));
+            handlers.Add('W', new MoveWestHandler(position));
+            handlers.Add('N', new MoveNorthHandler(position));
+        }
+
+        private MoveHandler LookupHandlerBy(char direction) {
+            return handlers[direction];
         }
 
         public string GetState() {
@@ -19,20 +35,7 @@ namespace RefactoringToPatterns.CommandPattern {
         public void Execute(string commands) {
             foreach (char command in commands) {
                 if (command == 'M') {
-                    switch (direction) {
-                        case 'E':
-                            existObstacle = new MoveEastHandler(position).Execute();
-                            break;
-                        case 'S':
-                            existObstacle = new MoveSouthHandler(position).Execute();
-                            break;
-                        case 'W':
-                            existObstacle = new MoveWestHandler(position).Execute();
-                            break;
-                        case 'N':
-                            existObstacle = new MoveNorthHandler(position).Execute();
-                            break;
-                    }
+                    existObstacle = LookupHandlerBy(direction).Execute();
                 }
                 else if (command == 'L') {
                     // get new direction
