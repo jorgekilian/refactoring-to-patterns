@@ -3,7 +3,7 @@ using System.Collections;
 namespace RefactoringToPatterns.CommandPattern {
     public class MoveNorthHandler : MoveHandler {
         private Position position;
-        public MoveNorthHandler(Position position) : base(position) {
+        public MoveNorthHandler(Position position) {
             this.position = position;
         }
 

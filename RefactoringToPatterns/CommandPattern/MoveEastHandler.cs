@@ -3,7 +3,7 @@ using System.Collections;
 namespace RefactoringToPatterns.CommandPattern {
     public class MoveEastHandler : MoveHandler {
         private readonly Position position;
-        public MoveEastHandler(Position position) : base(position) {
+        public MoveEastHandler(Position position) {
             this.position = position;
         }
 
