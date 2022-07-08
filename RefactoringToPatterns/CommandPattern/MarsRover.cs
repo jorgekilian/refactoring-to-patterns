@@ -21,16 +21,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            MoveEast();
+                            position = MoveEast(position);
                             break;
                         case 'S':
-                            MoveSouth();
+                            position = MoveSouth(position);
                             break;
                         case 'W':
-                            MoveWest();
+                            position = MoveWest(position);
                             break;
                         case 'N':
-                            MoveNorth();
+                            position = MoveNorth(position);
                             break;
                     }
                 }
@@ -57,24 +57,24 @@ namespace RefactoringToPatterns.CommandPattern {
             }
         }
 
-        private void MoveNorth() {
+        private Position MoveNorth(Position position) {
             obstacleFound = terrain.ExistObstacle(position.North());
-            position.Y = position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y;
+            return new Position(position.X, position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y);
         }
 
-        private void MoveWest() {
+        private Position MoveWest(Position position) {
             obstacleFound = terrain.ExistObstacle(position.West());
-            position.X = position.X > 0 && !obstacleFound ? position.X -= 1 : position.X;
+            return new Position(position.X > 0 && !obstacleFound ? position.X -= 1 : position.X, position.Y);
         }
 
-        private void MoveSouth() {
+        private Position MoveSouth(Position position) {
             obstacleFound = terrain.ExistObstacle(position.South());
-            position.Y = position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y;
+            return new Position(position.X, position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y);
         }
 
-        private void MoveEast() {
+        private Position MoveEast(Position position) {
             obstacleFound = terrain.ExistObstacle(position.East());
-            position.X = position.X < 9 && !obstacleFound ? position.X += 1 : position.X;
+            return new Position(position.X < 9 && !obstacleFound ? position.X += 1 : position.X, position.Y);
         }
     }
 }
