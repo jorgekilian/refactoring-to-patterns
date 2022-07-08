@@ -19,16 +19,16 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     switch (direction) {
                         case 'E':
-                            existObstacle = MoveToEast();
+                            existObstacle = position.PositionToEast();
                             break;
                         case 'S':
-                            existObstacle = MoveToSouth();
+                            existObstacle = position.PositionToSouth();
                             break;
                         case 'W':
-                            existObstacle = MoveToWest();
+                            existObstacle = position.PositionToWest();
                             break;
                         case 'N':
-                            existObstacle = MoveToNorth();
+                            existObstacle = position.PositionToNorth();
                             break;
                     }
                 }
@@ -53,22 +53,6 @@ namespace RefactoringToPatterns.CommandPattern {
                     }
                 }
             }
-        }
-
-        private bool MoveToNorth() {
-            return position.PositionToNorth(); ;
-        }
-
-        private bool MoveToWest() {
-            return position.PositionToWest(); ;
-        }
-
-        private bool MoveToSouth() {
-            return position.PositionToSouth(); ;
-        }
-
-        private bool MoveToEast() {
-            return position.PositionToEast();
         }
     }
 }
