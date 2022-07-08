@@ -13,7 +13,7 @@ namespace RefactoringToPatterns.CommandPattern {
         }
 
         public string GetState() {
-            return !obstacleFound ? $"{position.X}:{position.Y}:{direction}" : $"O:{position.X}:{position.Y}:{direction}";
+            return !position.HasObstacle ? $"{position.X}:{position.Y}:{direction}" : $"O:{position.X}:{position.Y}:{direction}";
         }
 
         public void Execute(string commands) {
@@ -59,22 +59,30 @@ namespace RefactoringToPatterns.CommandPattern {
 
         private Position MoveNorth(Position position) {
             obstacleFound = terrain.ExistObstacle(position.North());
-            return new Position(position.X, position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y);
+            return new Position(position.X, position.Y > 0 && !obstacleFound ? position.Y -= 1 : position.Y) {
+                HasObstacle = obstacleFound
+            };
         }
 
         private Position MoveWest(Position position) {
             obstacleFound = terrain.ExistObstacle(position.West());
-            return new Position(position.X > 0 && !obstacleFound ? position.X -= 1 : position.X, position.Y);
+            return new Position(position.X > 0 && !obstacleFound ? position.X -= 1 : position.X, position.Y){
+                HasObstacle = obstacleFound
+            };
         }
 
         private Position MoveSouth(Position position) {
             obstacleFound = terrain.ExistObstacle(position.South());
-            return new Position(position.X, position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y);
+            return new Position(position.X, position.Y < 9 && !obstacleFound ? position.Y += 1 : position.Y) {
+                HasObstacle = obstacleFound
+            };
         }
 
         private Position MoveEast(Position position) {
             obstacleFound = terrain.ExistObstacle(position.East());
-            return new Position(position.X < 9 && !obstacleFound ? position.X += 1 : position.X, position.Y);
+            return new Position(position.X < 9 && !obstacleFound ? position.X += 1 : position.X, position.Y) {
+                HasObstacle = obstacleFound
+            };
         }
     }
 }
