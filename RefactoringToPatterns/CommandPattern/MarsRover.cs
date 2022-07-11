@@ -5,15 +5,18 @@ using System.Security.Policy;
 namespace RefactoringToPatterns.CommandPattern {
     public class MarsRover {
         private char direction;
-        private readonly string _availableDirections = "NESW";
         private readonly Position position;
         private bool existObstacle;
         private Dictionary<char, MoveHandler> handlers;
+        private readonly CommandLeft commandLeft;
+        private readonly CommandRight commandRight;
 
         public MarsRover(Position position, char direction) {
             this.position = position;
             this.direction = direction;
             CreateMovementHandlers();
+            commandLeft = new CommandLeft();
+            commandRight = new CommandRight();
         }
 
 
@@ -27,27 +30,14 @@ namespace RefactoringToPatterns.CommandPattern {
                     existObstacle = LookupMovementHandlerBy().Execute();
                 }
                 else if (command == 'L') {
-                    // get new direction
-                    var currentDirectionPosition = _availableDirections.IndexOf(direction);
-                    if (currentDirectionPosition != 0) {
-                        direction = _availableDirections[currentDirectionPosition - 1];
-                    }
-                    else {
-                        direction = _availableDirections[3];
-                    }
+                    direction = commandLeft.GetDirectionLeft(direction);
                 }
                 else if (command == 'R') {
-                    // get new direction
-                    var currentDirectionPosition = _availableDirections.IndexOf(direction);
-                    if (currentDirectionPosition != 3) {
-                        direction = _availableDirections[currentDirectionPosition + 1];
-                    }
-                    else {
-                        direction = _availableDirections[0];
-                    }
+                    direction = commandRight.GetDirectionRight(direction);
                 }
             }
         }
+
         private void CreateMovementHandlers() {
             handlers = new Dictionary<char, MoveHandler> {
                 { 'E', new MoveEastHandler(position) },
