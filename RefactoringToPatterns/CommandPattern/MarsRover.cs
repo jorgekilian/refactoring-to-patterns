@@ -13,20 +13,9 @@ namespace RefactoringToPatterns.CommandPattern {
         public MarsRover(Position position, char direction) {
             this.position = position;
             this.direction = direction;
-            CreateHandlers();
+            CreateMovementHandlers();
         }
 
-        private void CreateHandlers() {
-            handlers = new Dictionary<char, MoveHandler>();
-            handlers.Add('E', new MoveEastHandler(position));
-            handlers.Add('S', new MoveSouthHandler(position));
-            handlers.Add('W', new MoveWestHandler(position));
-            handlers.Add('N', new MoveNorthHandler(position));
-        }
-
-        private MoveHandler LookupHandlerBy(char direction) {
-            return handlers[direction];
-        }
 
         public string GetState() {
             return !existObstacle ? $"{position.X}:{position.Y}:{direction}" : $"O:{position.X}:{position.Y}:{direction}";
@@ -35,7 +24,7 @@ namespace RefactoringToPatterns.CommandPattern {
         public void Execute(string commands) {
             foreach (char command in commands) {
                 if (command == 'M') {
-                    existObstacle = LookupHandlerBy(direction).Execute();
+                    existObstacle = LookupMovementHandlerBy(direction).Execute();
                 }
                 else if (command == 'L') {
                     // get new direction
@@ -58,6 +47,17 @@ namespace RefactoringToPatterns.CommandPattern {
                     }
                 }
             }
+        }
+        private void CreateMovementHandlers() {
+            handlers = new Dictionary<char, MoveHandler>();
+            handlers.Add('E', new MoveEastHandler(position));
+            handlers.Add('S', new MoveSouthHandler(position));
+            handlers.Add('W', new MoveWestHandler(position));
+            handlers.Add('N', new MoveNorthHandler(position));
+        }
+
+        private MoveHandler LookupMovementHandlerBy(char direction) {
+            return handlers[direction];
         }
     }
 }
