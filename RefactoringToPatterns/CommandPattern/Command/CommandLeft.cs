@@ -8,7 +8,7 @@ namespace RefactoringToPatterns.CommandPattern.Command {
                 availableDirection = AvailableDirections[AvailableDirections.IndexOf(direction) - 1];
             }
             direction = availableDirection;
-            return true;
+            return false;
         }
     }
 }
