@@ -36,7 +36,7 @@ namespace RefactoringToPatterns.CommandPattern {
                     existObstacle = commandMovement.Execute(direction);
                 }
                 else {
-                    direction = handlers[command].Execute(direction);
+                    handlers[command].Execute(ref direction);
                 }
             }
         }
