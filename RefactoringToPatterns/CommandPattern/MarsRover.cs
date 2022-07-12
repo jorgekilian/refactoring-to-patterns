@@ -9,12 +9,14 @@ namespace RefactoringToPatterns.CommandPattern {
         private bool existObstacle;
         private readonly CommandLeft commandLeft;
         private readonly CommandRight commandRight;
+        private readonly CommandMovement commandMovement;
 
         public MarsRover(Position position, char direction) {
             this.position = position;
             this.direction = direction;
             commandLeft = new CommandLeft();
             commandRight = new CommandRight();
+            commandMovement = new CommandMovement();
         }
 
 
@@ -25,7 +27,7 @@ namespace RefactoringToPatterns.CommandPattern {
         public void Execute(string commands) {
             foreach (char command in commands) {
                 if (command == 'M') {
-                    existObstacle = ComandMovement(position, direction);
+                    existObstacle = commandMovement.ComandMovement(position, direction);
                 }
                 else if (command == 'L') {
                     direction = commandLeft.GetDirectionLeft(direction);
@@ -35,16 +37,5 @@ namespace RefactoringToPatterns.CommandPattern {
                 }
             }
         }
-
-        private bool ComandMovement(Position position, char direction) {
-            var handlers = new Dictionary<char, MoveHandler> {
-                { 'E', new MoveEastHandler(position) },
-                { 'S', new MoveSouthHandler(position) },
-                { 'W', new MoveWestHandler(position) },
-                { 'N', new MoveNorthHandler(position) }
-            };
-            return handlers[direction].Execute();
-        }
-
     }
 }
