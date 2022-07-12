@@ -2,7 +2,7 @@ namespace RefactoringToPatterns.CommandPattern {
     public class CommandRight {
         public CommandRight() { }
 
-        public char GetDirectionRight(char value) {
+        public char Execute(char value) {
             const string availableDirections = "NESW";
             var availableDirection = availableDirections[0];
             if (availableDirections.IndexOf(value) != 3) {

@@ -2,15 +2,18 @@ using System.Collections.Generic;
 
 namespace RefactoringToPatterns.CommandPattern {
     public class CommandMovement {
-        public CommandMovement() { }
+        private readonly Dictionary<char, MoveHandler> handlers;
 
-        public bool ComandMovement(Position position, char direction) {
-            var handlers = new Dictionary<char, MoveHandler> {
+        public CommandMovement(Position position) {
+            handlers = new Dictionary<char, MoveHandler> {
                 { 'E', new MoveEastHandler(position) },
                 { 'S', new MoveSouthHandler(position) },
                 { 'W', new MoveWestHandler(position) },
                 { 'N', new MoveNorthHandler(position) }
             };
+        }
+
+        public bool Execute(char direction) {
             return handlers[direction].Execute();
         }
     }

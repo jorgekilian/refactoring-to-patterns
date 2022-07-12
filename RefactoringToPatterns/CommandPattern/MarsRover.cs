@@ -16,7 +16,7 @@ namespace RefactoringToPatterns.CommandPattern {
             this.direction = direction;
             commandLeft = new CommandLeft();
             commandRight = new CommandRight();
-            commandMovement = new CommandMovement();
+            commandMovement = new CommandMovement(this.position);
         }
 
 
@@ -25,15 +25,15 @@ namespace RefactoringToPatterns.CommandPattern {
         }
 
         public void Execute(string commands) {
-            foreach (char command in commands) {
+            foreach (var command in commands) {
                 if (command == 'M') {
-                    existObstacle = commandMovement.ComandMovement(position, direction);
+                    existObstacle = commandMovement.Execute(direction);
                 }
                 else if (command == 'L') {
-                    direction = commandLeft.GetDirectionLeft(direction);
+                    direction = commandLeft.Execute(direction);
                 }
                 else if (command == 'R') {
-                    direction = commandRight.GetDirectionRight(direction);
+                    direction = commandRight.Execute(direction);
                 }
             }
         }
