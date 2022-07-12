@@ -8,20 +8,18 @@ namespace RefactoringToPatterns.CommandPattern {
         private char direction;
         private readonly Position position;
         private bool existObstacle;
-        private readonly CommandLeft commandLeft;
-        private readonly CommandRight commandRight;
-        private readonly CommandMovement commandMovement;
         private readonly Dictionary<char, CommandHandler> handlers;
 
         public MarsRover(Position position, char direction) {
             this.position = position;
             this.direction = direction;
-            commandLeft = new CommandLeft();
-            commandRight = new CommandRight();
-            commandMovement = new CommandMovement(this.position);
+            new CommandLeft();
+            new CommandRight();
+            new CommandMovement(this.position);
             handlers = new Dictionary<char, CommandHandler> {
                 { 'L', new CommandLeft() },
-                { 'R', new CommandRight() }
+                { 'R', new CommandRight() },
+                { 'M', new CommandMovement(this.position) }
             };
         }
 
@@ -33,7 +31,7 @@ namespace RefactoringToPatterns.CommandPattern {
         public void Execute(string commands) {
             foreach (var command in commands) {
                 if (command == 'M') {
-                    existObstacle = commandMovement.Execute(direction);
+                    existObstacle = handlers[command].Execute(ref direction);
                 }
                 else {
                     handlers[command].Execute(ref direction);

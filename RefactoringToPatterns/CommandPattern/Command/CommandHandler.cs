@@ -1,6 +1,6 @@
 ﻿namespace RefactoringToPatterns.CommandPattern.Command {
     public abstract class CommandHandler {
 
-        public abstract char Execute(ref char direction);
+        public abstract bool Execute(ref char direction);
     }
 }
