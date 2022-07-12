@@ -53,15 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandPattern.Tests\MarsRoverShould.cs" />
-    <Compile Include="CommandPattern\CommandLeft.cs" />
-    <Compile Include="CommandPattern\CommandMovement.cs" />
-    <Compile Include="CommandPattern\CommandRight.cs" />
+    <Compile Include="CommandPattern\Command\CommandHandler.cs" />
+    <Compile Include="CommandPattern\Command\CommandLeft.cs" />
+    <Compile Include="CommandPattern\Command\CommandMovement.cs" />
+    <Compile Include="CommandPattern\Command\CommandRight.cs" />
     <Compile Include="CommandPattern\MarsRover.cs" />
-    <Compile Include="CommandPattern\MoveEastHandler.cs" />
-    <Compile Include="CommandPattern\MoveHandler.cs" />
-    <Compile Include="CommandPattern\MoveNorthHandler.cs" />
-    <Compile Include="CommandPattern\MoveSouthHandler.cs" />
-    <Compile Include="CommandPattern\MoveWestHandler.cs" />
+    <Compile Include="CommandPattern\Movement\MoveEastHandler.cs" />
+    <Compile Include="CommandPattern\Movement\MoveHandler.cs" />
+    <Compile Include="CommandPattern\Movement\MoveNorthHandler.cs" />
+    <Compile Include="CommandPattern\Movement\MoveSouthHandler.cs" />
+    <Compile Include="CommandPattern\Movement\MoveWestHandler.cs" />
     <Compile Include="CommandPattern\Position.cs" />
     <Compile Include="ComposeMethod.Tests\ListShould.cs" />
     <Compile Include="ComposeMethod\List.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="CreationMethods\ProductPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.

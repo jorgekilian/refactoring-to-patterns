@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using RefactoringToPatterns.CommandPattern.Movement;
 
-namespace RefactoringToPatterns.CommandPattern {
+namespace RefactoringToPatterns.CommandPattern.Command {
     public class CommandMovement {
         private readonly Dictionary<char, MoveHandler> handlers;
 

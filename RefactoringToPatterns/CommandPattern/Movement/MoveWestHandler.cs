@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace RefactoringToPatterns.CommandPattern {
+namespace RefactoringToPatterns.CommandPattern.Movement {
     public class MoveWestHandler : MoveHandler {
         private Position position;
         public MoveWestHandler(Position position) {

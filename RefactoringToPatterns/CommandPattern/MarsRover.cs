@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Security.Policy;
+using RefactoringToPatterns.CommandPattern.Command;
 
 namespace RefactoringToPatterns.CommandPattern {
     public class MarsRover {
@@ -10,6 +11,7 @@ namespace RefactoringToPatterns.CommandPattern {
         private readonly CommandLeft commandLeft;
         private readonly CommandRight commandRight;
         private readonly CommandMovement commandMovement;
+        private readonly Dictionary<char, CommandHandler> handlers;
 
         public MarsRover(Position position, char direction) {
             this.position = position;
@@ -17,6 +19,10 @@ namespace RefactoringToPatterns.CommandPattern {
             commandLeft = new CommandLeft();
             commandRight = new CommandRight();
             commandMovement = new CommandMovement(this.position);
+            handlers = new Dictionary<char, CommandHandler> {
+                { 'L', new CommandLeft() },
+                { 'R', new CommandRight() }
+            };
         }
 
 
@@ -29,11 +35,8 @@ namespace RefactoringToPatterns.CommandPattern {
                 if (command == 'M') {
                     existObstacle = commandMovement.Execute(direction);
                 }
-                else if (command == 'L') {
-                    direction = commandLeft.Execute(direction);
-                }
-                else if (command == 'R') {
-                    direction = commandRight.Execute(direction);
+                else {
+                    direction = handlers[command].Execute(direction);
                 }
             }
         }

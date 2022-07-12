@@ -1,8 +1,6 @@
-namespace RefactoringToPatterns.CommandPattern {
-    public class CommandRight {
-        public CommandRight() { }
-
-        public char Execute(char value) {
+namespace RefactoringToPatterns.CommandPattern.Command {
+    public class CommandRight : CommandHandler {
+        public override char Execute(char value) {
             const string availableDirections = "NESW";
             var availableDirection = availableDirections[0];
             if (availableDirections.IndexOf(value) != 3) {
@@ -11,5 +9,6 @@ namespace RefactoringToPatterns.CommandPattern {
 
             return availableDirection;
         }
+
     }
 }
